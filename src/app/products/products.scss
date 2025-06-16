@@ -1,0 +1,21 @@
+// src/app/components/products/products.component.scss
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 16px;
+}
+
+.filter-input {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
