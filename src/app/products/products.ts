@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, input } from '@angular/core';
 import { ProductsService } from '../services/product.service';
 import { Product } from '../model/product.model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,54 +11,62 @@ import { MatSortModule } from '@angular/material/sort';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { take } from 'rxjs/operators';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [  
+  imports: [
     CommonModule,
     FormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './products.html',
   styleUrls: ['./products.scss']
 })
+
+
+
 export class ProductsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'price', 'category'];
-  dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>([]); // Initialize with empty array
+  dataSource = new MatTableDataSource<Product>(); //Data source for the product table, initialized with an empty array of products
 
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort!: MatSort; // Reference to the MatSort directive for sorting functionality
+  @ViewChild('filterInput') filterInput!: ElementRef<HTMLInputElement>;// Reference to the filter input element for filtering products
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService) { }
 
-  ngOnInit() {
-    this.productsService.getProducts().pipe(
-      take(1) // Using RxJS take operator
-    ).subscribe({
-      next: (products) => {
-        this.dataSource = new MatTableDataSource(products);
-        this.setSorting(); // Call sorting after data load
-      },
-      error: (err) => console.error('Error loading products', err)
-    });
+  ngOnInit(): void {
+    this.loadProducts(); 
+
   }
 
-  ngAfterViewInit() {
-    this.setSorting(); // Also try to set sorting when view ready
+  ngAfterViewInit(): void {
+    console.log('ProductsComponent AfterViewInit');
+    this.dataSource.sort = this.sort;// Assign the MatSort directive to the data source for sorting functionality
   }
 
-  private setSorting() {
-    if (this.sort && this.dataSource.data.length) {
-      this.dataSource.sort = this.sort;
-    }
-  }
-
-  applyFilter(event: Event) {
+  // Method to apply filter based on user input
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log('Applying filter:', filterValue);
+    this.dataSource.filter = filterValue.trim().toLowerCase();// Set the filter value to the data source, trimming whitespace and converting to lowercase
   }
+  // Method to load products from the service
+  loadProducts(): void {
+    this.productsService.getProducts()
+      .pipe(take(1))
+      .subscribe((products: Product[]) => {
+        this.dataSource.data = products; // Load products when the component initializes
+      });
+  }
+
 }

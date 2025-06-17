@@ -1,33 +1,68 @@
+<div  class="dashboard-container">
+  <h1 class="dashboard-title" align="center">Product Inventory</h1>
 
-<div class="dashboard-container">
-  <mat-card>
-    <mat-card-title>Product Dashboard</mat-card-title>
-    
-    <mat-form-field appearance="fill" class="filter-input">
-      <mat-label>Filter by name</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Type product name...">
-    </mat-form-field>
-    
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let product">{{product.id}}</td>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let product">{{product.name}}</td>
-      </ng-container>
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-        <td mat-cell *matCellDef="let product">{{product.price}}</td>
-      </ng-container>
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-        <td mat-cell *matCellDef="let product">{{product.category}}</td>
-      </ng-container>
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-subtitle align="center">Manage and view product inventory</mat-card-subtitle>
+    </mat-card-header>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    <mat-card-content>
+
+      <mat-form-field appearance="fill">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Type product name..." />
+      </mat-form-field>
+
+      <!-- Table -->
+      <div class="responsive-fixed-center" align="center">
+         
+        <table class="responsive-table" mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let product">{{ product.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let product">{{ product.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let product">
+              {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef>Category</th>
+            <td mat-cell *matCellDef="let product">
+              <span class="category-badge">{{ product.category }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="noData">
+            <td mat-footer-cell *matFooterCellDef colspan="4">
+              No products found matching "{{ dataSource.filter }}"
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="['noData']"
+            [style.display]="dataSource.filteredData.length === 0 ? '' : 'none'">
+          </tr>
+
+        </table>
+      </div>
+    
+
+    </mat-card-content>
+
+    <mat-card-actions align="end" *ngIf="dataSource.data.length">
+      <div class="mat-caption">
+        Showing {{ dataSource.filteredData.length }} of {{ dataSource.data.length }} products
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>
