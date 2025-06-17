@@ -2,6 +2,26 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
 
+# 📦 Product Dashboard – Angular Interview Task
+
+This is a responsive Angular application that displays a list of products, featuring filtering and sorting capabilities. It was built as part of an interview assessment.
+
+---
+
+## 🚀 Features
+
+- ✅ Load product data from a local JSON file (`assets/products.json`)
+- 🔍 Filter products by name using a dynamic search bar
+- ↕️ Sort products manually by clicking on the **Name** column
+- 📱 Fully responsive design with horizontal scroll support on small screens
+- ⚡ Built using standalone Angular components (no NgModule required)
+- 🧪 Clean structure with clear state management and separation of concerns
+
+---
+
+🗂 Sample Data:
+https://mockapi.io/projects/6850b8a7e7c42cfd179961d6/products
+
 ## Development server
 
 To start a local development server, run:
