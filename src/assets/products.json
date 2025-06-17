@@ -1,22 +1,23 @@
 [
   { "id": 1,
    "name": "iPhone 14",
-   "category": "Electronics", 
-   "price": 799 
+   "price": 799 ,
+   "category": "Electronics"
+   
   },
   { "id": 2,
    "name": "Galaxy S22",
-   "category": "Electronics",
-   "price": 699
+   "price": 699,
+   "category": "Electronics"
   },
   { "id": 3,
    "name": "Nike Shoes",
-   "category": "Footwear",
-   "price": 120
+   "price": 120,
+    "category": "Footwear"
   },
   { "id": 4,
    "name": "Bata Shoes",
-   "category": "Footwear",
-   "price": 100
+   "price": 100,
+   "category": "Footwear"
   }
 ]
