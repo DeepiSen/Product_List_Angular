@@ -29,11 +29,13 @@
       background: #e0e0e0;
       padding: 4px 8px;
       border-radius: 16px;
-      font-size: 12px;
+      font-size: 15px;
     }
 
-    .mat-sort-header-arrow {
-      opacity: 1 !important;
+    .mat-card-title {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 16px;
     }
 
     mat-card-actions {
@@ -41,7 +43,7 @@
       padding-top: 16px;
       margin-top: 16px;
     }
-     th,
+    th,
     td {
       white-space: nowrap;
       padding: 0.5rem;
@@ -57,6 +59,14 @@
       width: 100%;
       -webkit-overflow-scrolling: touch; // smooth scroll on mobile
       scrollbar-width: thin;
+    }
+
+    .mat-sort-header-arrow {
+      opacity: 5 !important;
+      color: #000 !important;
+    }
+    .mat-sort-header-sorted {
+      color: #000 !important;
     }
 
 }

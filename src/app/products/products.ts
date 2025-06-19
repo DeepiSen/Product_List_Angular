@@ -44,21 +44,24 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   constructor(private productsService: ProductsService) { }
 
+  
+
   ngOnInit(): void {
     this.loadProducts(); 
 
   }
 
   ngAfterViewInit(): void {
-    console.log('ProductsComponent AfterViewInit');
     this.dataSource.sort = this.sort;// Assign the MatSort directive to the data source for sorting functionality
+    
   }
 
   // Method to apply filter based on user input
   applyFilter(event: Event): void {
+    
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log('Applying filter:', filterValue);
-    this.dataSource.filter = filterValue.trim().toLowerCase();// Set the filter value to the data source, trimming whitespace and converting to lowercase
+    this.dataSource.filter = filterValue.trim().toLowerCase();// Set the filter value to the data source, trimming whitespace and converting to lowercase\console.log(this.dataSource.filteredData.map(p => p.price));
+    
   }
   // Method to load products from the service
   loadProducts(): void {
@@ -66,6 +69,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       .pipe(take(1))
       .subscribe((products: Product[]) => {
         this.dataSource.data = products; // Load products when the component initializes
+        console.log(this.dataSource.data);
+       // console.log(this.dataSource.filteredData.map(p => p.price));
       });
   }
 
