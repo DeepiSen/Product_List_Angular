@@ -11,14 +11,7 @@
       max-width: 400px;
       margin-bottom: 16px;
     }
-
-    .table-responsive {
-      overflow-x: auto;
-      width: 100%;
-      -webkit-overflow-scrolling: touch; // smooth scroll on mobile
-      scrollbar-width: thin;
-    }
-
+    
     .loading-shade {
       position: absolute;
       top: 0;
@@ -48,17 +41,23 @@
       padding-top: 16px;
       margin-top: 16px;
     }
-
-    table {
-      min-width: 700px;
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th,
+     th,
     td {
       white-space: nowrap;
       padding: 0.5rem;
     }
-  }
+     table {
+      min-width: 700px;
+      width: 100%;
+      border-collapse: collapse;
+      border: 0;
+    }
+    .table-responsive {
+      overflow-x: auto;
+      width: 100%;
+      -webkit-overflow-scrolling: touch; // smooth scroll on mobile
+      scrollbar-width: thin;
+    }
+
+}
 }
