@@ -22,6 +22,9 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 🗂 Sample Data:
 https://mockapi.io/projects/6850b8a7e7c42cfd179961d6/products
 
+## Output Link:
+https://deepisen.github.io/Product_List_Angular/
+
 ## Development server
 
 To start a local development server, run:
